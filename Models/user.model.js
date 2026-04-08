@@ -6,5 +6,10 @@ const userSchema = new mongoose.Schema({
     course: String,
 })
 
+userSchema.pre("save", function(next){
+        this.name = this.name.trim();
+        next();
+});
+
 const User = mongoose.model("User", userSchema);
 module.exports = { User };

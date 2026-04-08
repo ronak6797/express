@@ -23,9 +23,10 @@ app.set("views", path.join(__dirname, "views"))
 
 
 app.use("/api/user", userRouter)
-app.use("/api/user", orderRouter)
+app.use("/api/order", orderRouter)
 
-app.listen(process.env.PORT, () => {
-    dbConfig();
-    console.log(`Listening to port ${process.env.PORT}`);  
-})
+dbConfig().then(() => {
+  app.listen(process.env.PORT, () => {
+    console.log(`Listening on ${process.env.PORT}`);
+  });
+});
